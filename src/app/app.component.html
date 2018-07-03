@@ -17,7 +17,7 @@
                     type="button" mat-button matTooltip="Movies" routerLink="">
                     <span class='weight300 white-font'>e&e</span>
                 </button>
-                <button fxHide.xs fxHide.sm *ngIf="service.currentlyRegistering == false && router.url != '/convert'" type="button" [ngClass]="{'full-height-button': mediaService.screen_break_points.xsmall != true, 'full-height-button-mobile': mediaService.screen_break_points.xsmall == true}"
+                <button fxHide.xs fxHide.sm *ngIf="service.currentlyRegistering == false && router.url != '/convert' && router.url != '/search' && router.url != '/retrieve' && router.url != '/login'" type="button" [ngClass]="{'full-height-button': mediaService.screen_break_points.xsmall != true, 'full-height-button-mobile': mediaService.screen_break_points.xsmall == true}"
                     mat-button (click)="drawer.toggle()">
                     <i class="material-icons">&#xE148;</i>
                     Add New Movie
@@ -28,7 +28,7 @@
                 </button> -->
 
                 <span class="fill-remaining-space"></span>
-                <button fxHide.md fxHide.lg fxHide.xl class='button-spacing' *ngIf='router.url == "/movies" || router.url != "/convert" && service.currentlyRegistering == false'
+                <button fxHide.md fxHide.lg fxHide.xl class='button-spacing' *ngIf="service.currentlyRegistering == false && router.url != '/convert' && router.url != '/search' && router.url != '/retrieve' && router.url != '/login'"
                     type="button" mat-icon-button (click)="drawer.toggle()">
                     <i class="material-icons">&#xE148;</i>
 
@@ -69,7 +69,7 @@
                     <i color="primary" class="material-icons">&#xE05E;</i>
                 </mat-slide-toggle> -->
 
-                <button *ngIf="service.currentlyRegistering == false && router.url != '/convert'" type="button" mat-icon-button matTooltip="Movies" [matTooltipPosition]="position"
+                <button *ngIf="service.currentlyRegistering == false && router.url != '/convert' && router.url != '/search' && router.url != '/retrieve' && router.url != '/login'" type="button" mat-icon-button matTooltip="Movies" [matTooltipPosition]="position"
                     (click)="right.toggle()">
                     <i class="material-icons">settings</i>
                 </button>
