@@ -1,0 +1,23 @@
+
+<mat-toolbar></mat-toolbar>
+<div fxLayout="column" fxLayoutAlign="center center" class='padding20 signup-container'>
+    <mat-card-content>
+        <h1 class='center oleo-font'>e&e</h1>
+
+        <p class='center roboto-font'>Let's name your list</p>
+        <!-- <p class='center roboto-font'>Type your list name below</p> -->
+        <!-- <p class='center roboto-font'>Or click generate, and we'll name it for you</p> -->
+
+
+
+
+        <mat-form-field color='accent'  class="full-width">
+            <input autofocus matInput placeholder="Movie List Name" value="" [(ngModel)]="newAccountID">
+        </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+        <!-- <button mat-raised-button (click)='closeDialog()' routerLink="search">Generate</button> -->
+
+        <button color="accent" mat-raised-button (click)='changeAccountID(newAccountID)' routerLink="search" [disabled]="newAccountID == undefined">Submit</button>
+    </mat-card-actions>
+</div>

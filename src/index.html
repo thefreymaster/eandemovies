@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+
+<!-- <script type="text/javascript">
+  !function(name,path,ctx){
+    var latest,prev=name!=='Keen'&&window.Keen?window.Keen:false;ctx[name]=ctx[name]||{ready:function(fn){var h=document.getElementsByTagName('head')[0],s=document.createElement('script'),w=window,loaded;s.onload=s.onerror=s.onreadystatechange=function(){if((s.readyState&&!(/^c|loade/.test(s.readyState)))||loaded){return}s.onload=s.onreadystatechange=null;loaded=1;latest=w.Keen;if(prev){w.Keen=prev}else{try{delete w.Keen}catch(e){w.Keen=void 0}}ctx[name]=latest;ctx[name].ready(fn)};s.async=1;s.src=path;h.parentNode.insertBefore(s,h)}}
+  }('KeenAsync','https://d26b395fwzu5fz.cloudfront.net/keen-tracking-1.1.3.min.js',this);
+
+  KeenAsync.ready(function(){
+    // Configure a client instance
+    var client = new KeenAsync({
+      projectId: '5af5fc6ac9e77c000163947d',
+      writeKey: 'A2D4D0E1D5669E02EE82C1DA6341662A0258281B6347DF29A25FCE0F9D2D15387C3CE39F3905B2A6386A933EBA563652ED99C2CEBB7C88EBFD001D41C64F56B18B8C4A8E4987D0AC657E6F71B3BA50FB3F13006C949AB761F6212D673D7913EA'
+    });
+
+    // Record an event
+    client.recordEvent('pageviews', {
+      title: document.title
+    });
+  });
+</script> -->
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-40570108-5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-40570108-5');
+  </script>
+
+  <base href="/">
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="assets/touch-icon-iphone.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/touch-icon-iphone-retina.png">
+  <link rel="apple-touch-startup-image" href="assets/launch.png">
+
+  <!-- iPhone 6/7/8 -->
+  <link href="/images/favicon/750x1334.png" media="(device-width: 375px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+  <!-- iPhone 6 Plus/7 Plus/8 Plus -->
+  <link href="/images/favicon/1242x2208.png" media="(device-width: 414px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+
+  <!-- iOS Startup images -->
+  <link href="assets/launch.png" media="(device-width: 768px) and (orientation: landscape)" rel="apple-touch-startup-image">
+  <link href="assets/launch.png" media="(device-width: 1536px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image">
+  <link href="assets/launch.png" media="(device-width: 1536px)  and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image">
+
+  <title>E&E Movies</title>
+  <base href="/">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500" rel="stylesheet">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="assets/eandefavicon.png">
+</head>
+
+<body id='body'>
+
+  <app-root></app-root>
+
+</body>
+
+</html>

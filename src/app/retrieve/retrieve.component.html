@@ -1,0 +1,15 @@
+<mat-toolbar></mat-toolbar>
+<div fxLayout="column" fxLayoutAlign="center center"  class='padding20 signup-container show-animation'>
+    <mat-card-content>
+        <h1 class='center oleo-font'>e&e</h1>
+        <p class='center roboto-font'>Let's grab your existing list</p>
+        <p class='center roboto-font'>Type the list name below</p>
+        <!-- <p class='center roboto-font'>Or click generate, and we'll name it for you</p> -->
+        <mat-form-field color='accent' class="full-width">
+            <input autofocus matInput placeholder="Existing List Name" value="" [(ngModel)]="newAccountID"  (keydown)="keydownSubmit($event, newAccountID)">
+        </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+        <button angulartics2On="click" angularticsAction="account-retrieved" angularticsLabel="account-retrieved" color="accent" mat-raised-button (click)='changeAccountID(newAccountID)' [disabled]="newAccountID == undefined">Submit</button>
+    </mat-card-actions>
+</div>

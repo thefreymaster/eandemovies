@@ -1,0 +1,254 @@
+<div class='full-height' *ngIf="service.loadingBigScreenItem" fxLayout="row" fxLayoutAlign="center center">
+  <mat-spinner color="accent"></mat-spinner>
+</div>
+
+<div fxLayout="column" *ngIf="!service.loadingBigScreenItem">
+
+  <mat-toolbar class='color-override' fxHide.xs fxHide.sm>
+    <mat-toolbar-row>
+    </mat-toolbar-row>
+
+  </mat-toolbar>
+
+  <!-- {{mediaService.media.isActive('xs')}} -->
+  <div fxLayout="row" class='content-container'>
+    <div fxFlex='30' fxHide.xs fxHide.sm>
+      <!-- mediaService.screen_break_points.xlarge -->
+      <img fxFill src="http://image.tmdb.org/t/p/w500{{service.currentBigScreenObject.data.poster_path}}">
+
+    </div>
+    <div class='padding20' fxFlex="70" fxFlex.xs="100" fxFlex.sm="100">
+
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <h1 fxHide.xs fxHide.sm class='mat-display-1'>{{service.currentBigScreenObject.data.title}}</h1>
+      </div>
+
+      <h1 fxHide.md fxHide.lg fxHide.xl class='mat-display-1 mobile-text'>{{service.currentBigScreenObject.data.title}}</h1>
+      <div fxLayout="row">
+        <p class='mat-subheading-2 opacity30 center'>{{service.currentBigScreenObject.data.tagline}} • {{service.currentBigScreenObject.data.genres[0].name}} • {{service.currentBigScreenObject.data.status}}</p>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-chip-list [ngClass]='{"center-items": mediaService.screen_break_points.xsmall == true}'>
+          <mat-chip class='mat-subheading-1'>{{service.currentBigScreenObject.data.runtime}}min</mat-chip>
+          <mat-chip class='mat-subheading-1'>{{service.currentBigScreenObject.data.vote_average}} stars</mat-chip>
+          <mat-chip class='mat-subheading-1'>{{service.currentBigScreenObject.data.year}}</mat-chip>
+          <mat-chip class='mat-subheading-1' fxHide.xs>{{service.currentBigScreenObject.data.production_countries[0].name}}</mat-chip>
+          <!-- <mat-chip class='mat-subheading-1'>{{service.currentBigScreenObject.data.Rated}}</mat-chip> -->
+
+        </mat-chip-list>
+
+      </div>
+
+      <mat-list>
+        <mat-list-item>
+          <mat-icon mat-list-icon matTooltip="Plot" [matTooltipPosition]="position">
+            <i class="material-icons">&#xE3B3;</i>
+          </mat-icon>
+          <p matTooltip="{{service.currentBigScreenObject.data.overview}}" [matTooltipPosition]="position" mat-line>{{service.currentBigScreenObject.data.overview}}</p>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item fxLayout="row" *ngIf='service.currentBigScreenObject.data.cast != undefined'>
+          <mat-icon mat-list-icon matTooltip="Actors" [matTooltipPosition]="position">
+            <i class="material-icons">&#xE87C;</i>
+          </mat-icon>
+          <span mat-line >
+            <span class="opacity50" *ngFor="let actor of service.currentBigScreenObject.data.cast; let g = index">
+              {{actor.name}}
+              <span *ngIf='g != service.currentBigScreenObject.data.cast.length-1'> • </span>
+            </span>
+          </span>
+
+        </mat-list-item>
+
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <mat-icon mat-list-icon matTooltip="Director" [matTooltipPosition]="position">
+            <i class="material-icons">&#xE903;</i>
+          </mat-icon>
+
+          <p class="opacity50" mat-line>{{service.currentBigScreenObject.data.director}}</p>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item *ngIf='service.currentBigScreenObject.data.production_companies.length > 0'>
+          <mat-icon mat-list-icon matTooltip="Production Company" [matTooltipPosition]="position">
+            <i class="material-icons">videocam</i>
+          </mat-icon>
+
+          <p class="opacity50" mat-line>{{service.currentBigScreenObject.data.production_companies[0].name}} </p>
+        </mat-list-item>
+        <mat-divider *ngIf='service.currentBigScreenObject.data.production_companies.length > 0'></mat-divider>
+        <mat-list-item>
+          <mat-icon mat-list-icon matTooltip="Filming Locations" [matTooltipPosition]="position">
+            <i class="material-icons">&#xE55B;</i>
+          </mat-icon>
+          <span mat-line>
+
+            <span class="opacity50" *ngFor="let location of service.currentBigScreenObject.data.production_countries; let i = index">
+              {{location.name}}
+              <span *ngIf='i != service.currentBigScreenObject.data.production_countries.length-1'>•</span>
+            </span>
+          </span>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <mat-icon mat-list-icon matTooltip="Box Office" [matTooltipPosition]="position">
+            <i class="material-icons">&#xE227;</i>
+          </mat-icon>
+          <p class="opacity50" mat-line>{{service.currentBigScreenObject.data.revenue | currency}}</p>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <div *ngIf=' service.currentBigScreenObject.data.related_movies != undefined'>
+            <div fxHide.md fxHide.lg fxHide.xl *ngFor="let related of service.currentBigScreenObject.data.related_movies; let j = index">
+                <mat-list-item (click)="firebase.addMovie(related, true, false)">
+                  <i class="material-icons">add_circle</i>
+                  <img matListAvatar class='mobile-avatar-poster mat-elevation-z3 movielist-poster' src="http://image.tmdb.org/t/p/w92{{related.poster_path}}">
+                  <h4 mat-line class='title-mobile'>{{related.title}}</h4>
+                  <p mat-line class='subtitle-mobile'>{{related.director}}</p>
+                  <p mat-line class='subtitle-mobile'>{{related.vote_average}}</p>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+              </div>
+        </div>
+
+        <mat-list-item fxHide.xs fxHide.sm>
+          <mat-icon mat-list-icon matTooltip="Director" [matTooltipPosition]="position">
+            <i class="material-icons">explore</i>
+          </mat-icon>
+
+          <p class="opacity50" mat-line>Related</p>
+        </mat-list-item>
+
+        <!-- <mat-list-item class='margin-left-correction'>
+
+          <mat-radio-group>
+            <mat-radio-button color="accent" [checked]="service.currentBigScreenObject.metrics.watched === true" (change)="radioChange($event, service.currentBigScreenObject)"
+              value="true">Watched</mat-radio-button>
+            <mat-radio-button color="accent" [checked]="service.currentBigScreenObject.metrics.watched === false" (change)="radioChange($event, service.currentBigScreenObject)"
+              value="false">Not Watched</mat-radio-button>
+          </mat-radio-group>
+
+        </mat-list-item> -->
+
+        <!-- <mat-list-item fxHide.md fxHide.lg fxHide.xl>
+          <div class='padding20' fxFlex="20" *ngFor="let related of service.currentBigScreenObject.related_movies; let j = index">
+            <img mat-card-image class='opacity100 mat-elevation-z4 related-image' fxFill src="http://image.tmdb.org/t/p/w342{{related.poster_path}}">
+          </div>
+        </mat-list-item> -->
+      </mat-list>
+
+      <div fxLayout='row' fxHide.xs fxHide.sm class='margin-correction-for-related-mobile'>
+        <div fxFlex='33' fxHide.xs fxHide.sm>
+          <mat-list>
+            <mat-list-item fxHide.md fxHide.lg fxHide.xl>
+              <mat-icon mat-list-icon matTooltip="Director" [matTooltipPosition]="position">
+                <i class="material-icons">explore</i>
+              </mat-icon>
+
+              <p class="opacity50" mat-line>Related</p>
+            </mat-list-item>
+            <div *ngFor="let related of service.currentBigScreenObject.data.related_movies1_2; let j = index">
+              <mat-list-item class='related-image' (click)="firebase.addMovie(related, true, false)">
+                <i class="material-icons">add_circle</i>
+                <img matListAvatar class='mobile-avatar-poster mat-elevation-z3 movielist-poster' src="http://image.tmdb.org/t/p/w92{{related.poster_path}}">
+                <h4 mat-line class='title-mobile'>{{related.title}}</h4>
+                <p mat-line class='subtitle-mobile'>{{related.director}}</p>
+                <p mat-line class='subtitle-mobile'>{{related.vote_average}}</p>
+              </mat-list-item>
+              <mat-divider *ngIf='j != 1'></mat-divider>
+            </div>
+          </mat-list>
+        </div>
+        <div fxFlex='33' fxHide.xs fxHide.sm>
+          <mat-list>
+            <div *ngFor="let related of service.currentBigScreenObject.data.related_movies3_4; let j = index">
+              <mat-list-item class='related-image' (click)="firebase.addMovie(related, true, false)">
+                <i class="material-icons">add_circle</i>
+                <img matListAvatar class='mobile-avatar-poster mat-elevation-z3 movielist-poster' src="http://image.tmdb.org/t/p/w92{{related.poster_path}}">
+                <h4 mat-line class='title-mobile'>{{related.title}}</h4>
+                <p mat-line class='subtitle-mobile'>{{related.director}}</p>
+                <p mat-line class='subtitle-mobile'>{{related.vote_average}}</p>
+              </mat-list-item>
+              <mat-divider *ngIf='j != 1'></mat-divider>
+            </div>
+          </mat-list>
+        </div>
+        <div fxFlex='33' fxHide.xs fxHide.sm>
+          <mat-list>
+            <div *ngFor="let related of service.currentBigScreenObject.data.related_movies5_6; let j = index">
+              <mat-list-item class='related-image' (click)="firebase.addMovie(related, true, false)">
+                <i class="material-icons">add_circle</i>
+                <img matListAvatar class='mobile-avatar-poster mat-elevation-z3 movielist-poster' src="http://image.tmdb.org/t/p/w92{{related.poster_path}}">
+                <h4 mat-line class='title-mobile'>{{related.title}}</h4>
+                <p mat-line class='subtitle-mobile'>{{related.director}}</p>
+                <p mat-line class='subtitle-mobile'>{{related.vote_average}}</p>
+              </mat-list-item>
+              <mat-divider *ngIf='j != 1'></mat-divider>
+            </div>
+          </mat-list>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-toolbar fxHide.xs fxHide.sm class='color-override fixed-bottom'>
+    <mat-toolbar-row fxLayout='row'>
+      <div fxFlex='30'></div>
+      <div fxFlex='70'>
+
+        <a *ngIf="service.amazonItemsFound == true" (click)='service.acquision(service.currentBigScreenObject.data.title); openAmazonPage()'
+          class='remove-decoration margin-left10'>
+          <button color="accent" type="button" mat-raised-button>
+            <i class="material-icons">&#xE8CC;</i>
+            <span> Rent Movie</span>
+          </button>
+        </a>
+        <a class='remove-decoration' target='_blank' href='https://www.youtube.com/results?search_query={{service.currentBigScreenObject.data.title}}'>
+          <button class='full-height-button' type="button" mat-button>
+            <i color="primary" class="material-icons">&#xE54D;</i>
+            <span> Trailer</span>
+          </button>
+        </a>
+        <a class='remove-decoration' target='_blank' href='https://www.themoviedb.org/movie/{{service.currentBigScreenObject.data.id}}'>
+          <button class='full-height-button' type="button" mat-button>
+            <i color="primary" class="material-icons">&#xE875;</i>
+            <span> The Movie Db</span>
+
+          </button>
+        </a>
+        <a class='remove-decoration' target='_blank' href='https://en.wikipedia.org/wiki/{{service.currentBigScreenObject.data.title}}'>
+          <button class='full-height-button' type="button" mat-button>
+            <i color="primary" class="material-icons">&#xE86E;</i>
+            <span> Wikipedia</span>
+
+          </button>
+        </a>
+        <a *ngIf="service.amazonItemsFound == true" (click)='service.acquision(service.currentBigScreenObject.data.title); openAmazonPage()'
+          class='remove-decoration'>
+          <button class='full-height-button' type="button" mat-button>
+            <i class="material-icons">&#xE8CC;</i>
+            <span> Amazon</span>
+
+          </button>
+        </a>
+      </div>
+      <!-- <button type="button" (click)="firebase.removeMovie(service.currentBigScreenObject)" mat-icon-button matTooltip="Delete" [matTooltipPosition]="position">
+        <i class="material-icons">delete_forever</i>
+      </button> -->
+    </mat-toolbar-row>
+
+  </mat-toolbar>
+
+  <mat-toolbar fxHide.md fxHide.lg fxHide.xl class='color-override fixed-bottom'>
+    <mat-toolbar-row fxLayout='row' fxLayoutAlign="center center">
+      <!-- <span>Options</span> -->
+      <div fxFlex='100'>
+        <a (click)='service.acquision(service.currentBigScreenObject.data.title); openAmazonPage()' *ngIf="service.amazonItemsFound == true"
+          fxFlex='100' class='remove-decoration'>
+          <button color="accent" type="button" mat-raised-button class='width100'>
+            <i class="material-icons">&#xE8CC;</i>
+            <span> Rent Movie</span>
+          </button>
+        </a>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

@@ -1,0 +1,42 @@
+
+
+<mat-list>
+  <h3 mat-subheader>Your shareable code</h3>
+  <mat-list-item>
+    <p mat-line>
+      <mat-chip-list>
+        <mat-chip color="primary" selected>{{firebase.accountID}}</mat-chip>
+      </mat-chip-list>
+    </p>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <h3 mat-subheader>Use a friend's code</h3>
+  <mat-list-item>
+    <p mat-line>
+      <mat-form-field class="example-full-width">
+        <input [disabled]="firebase.changingID == true" matInput placeholder="Use a friend's code" value="" [(ngModel)]="newAccountID"
+          (keydown)="keydownSubmit($event, newAccountID)">
+      </mat-form-field>
+      <button type="button" mat-raised-button color="primary" class="btn-block" [disabled]="firebase.changingID == true || newAccountID == undefined"
+        (click)="changeAccountID(newAccountID)">
+        Sync
+      </button>
+    </p>
+
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <h3 mat-subheader>Version</h3>
+  <mat-list-item>
+    <h4 mat-line>
+      {{firebase.currentVersion}}
+    </h4>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <h3 mat-subheader>Data provided by</h3>
+  <mat-list-item>
+    <p mat-line>
+        <img class='tmdb' src='../../assets/tmdb.svg'/>
+    </p>
+  </mat-list-item>
+
+</mat-list>

@@ -1,0 +1,64 @@
+<mat-toolbar></mat-toolbar>
+
+<div fxLayout="column" fxLayoutAlign="center center" class='padding20 signup-container'>
+    <h1 class='center oleo-font'>e&e</h1>
+    <p class='center roboto-font'>Let's search your first movie</p>
+
+    <div class="padding-20" *ngIf="searchItemDisplayed == false">
+        <mat-form-field color="accent" class="example-full-width" >
+            <input matInput placeholder="Movie Title" [(ngModel)]="firebase.searchObject.title" (keydown)="keydownSubmit($event)">
+        </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="searchItemDisplayed == false">
+        <button color="accent" [disabled]="firebase.searchObject.title.length == 0 || disableSearch == true" type="button" mat-raised-button
+            class="btn-block" (click)="search(firebase.searchObject.title, firebase.searchObject.year)">
+            Search
+        </button>
+        <button color="accent" mat-raised-button routerLink="retrieve">Retrieve List Instead</button>
+    </div>
+    <div>
+
+            <div fxLayout="column" fxLayoutAlign="center center" *ngFor="let movie of service.movies" (click)="firebase.addMovie(movie, true, false); service.first(movie)" class='hover-cursor'
+            angulartics2On="click" angularticsAction="account-created" angularticsLabel="account-created">
+    
+                <button mat-fab color="accent" class='add-button'>
+                    <i class="material-icons">&#xE148;</i>
+                </button>
+                <img class='search-poster mat-elevation-z4' src="http://image.tmdb.org/t/p/w342{{movie.poster_path}}" alt="...">
+                <div class='side-nav-text-container'>
+                    <!-- <div fxLayout="row" fxLayoutAlign="center center">
+                    <div class='left mat-display-1 side-nav-title weight200'>
+                      {{movie.Title}}
+                    </div>
+                  </div> -->
+    
+    
+                    <!-- <div fxLayout="row" class='padding10 icon-over-image' fxLayoutAlign="center center">
+                        <mat-chip-list>
+                            <mat-chip class='mat-subheading-1'>{{movie.Year}}</mat-chip>
+                            <mat-chip class='mat-subheading-1'>{{movie.imdbRating}}</mat-chip>
+                        </mat-chip-list>
+                    </div> -->
+    
+                </div>
+    
+            </div>
+            <div *ngFor="let error of service.movies">
+                <mat-list-item *ngIf="service.movies.Response == 'False'">
+                    <h4 class='left'>
+                        {{error.Error}}
+                    </h4>
+                    <p mat-line class='left margin-align'> Try again! </p>
+                    <mat-divider></mat-divider>
+                </mat-list-item>
+            </div>
+        </div>
+</div>
+
+
+<mat-list>
+
+    
+
+
+</mat-list>

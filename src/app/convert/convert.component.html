@@ -1,0 +1,19 @@
+<mat-toolbar fxHide.xs fxHide.sm fxHide.md></mat-toolbar>
+<div gutterSize="20px" fxLayout="column" fxLayoutAlign="center center" class='padding20 signup-container'>
+  <mat-card-content>
+    <h1 class='center oleo-font'>Let's Upgrade</h1>
+    <p class='center roboto-font'>Looks like we found some e&e version 1.0 data in your account.</p>
+    <p class='center roboto-font'>We're going to convert your account data to version 2.0.</p>
+    <p class='center roboto-font'>This will take 30 seconds to complete.</p>
+    <p class='center roboto-font'>A max of 40 items can be converted.  Please manually add the remaining items.</p>
+    <p class='center roboto-font'>This is your new account code.</p>
+      <div fxLayout="row" fxLayoutAlign="start center">
+          <mat-chip-list class='center-items'>
+              <mat-chip class='mat-subheading-1'>{{firebase.accountID}}</mat-chip> 
+          </mat-chip-list> 
+        </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <mat-spinner color="accent"></mat-spinner>
+  </mat-card-actions>
+</div>

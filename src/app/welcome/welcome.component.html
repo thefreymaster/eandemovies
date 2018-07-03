@@ -1,0 +1,12 @@
+<mat-toolbar fxHide.xs fxHide.sm fxHide.md></mat-toolbar>
+<div id='welcome' gutterSize="20px" fxLayout="column" fxLayoutAlign="center center" class='padding20 signup-container'>
+    <!-- <img class='welcome-logo mat-elevation-z1' src="../assets/eande.svg" alt="Photo of a Shiba Inu"> -->
+    <mat-card-content>
+        <h1 class='center oleo-font'>e&e</h1>
+        <p class='center roboto-font'>e&e remembers your movies, so you don't have to</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button color="accent" mat-raised-button (click)='goToSearch()'>New List</button>
+        <button color="accent" mat-raised-button routerLink="retrieve">Retrieve List</button>
+    </mat-card-actions>
+</div>

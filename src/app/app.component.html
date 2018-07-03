@@ -1,0 +1,95 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<header>
+
+</header>
+<mat-drawer-container class="sidenav-container" autosize >
+    <mat-drawer position="start" #drawer class="mat-elevation-z2" mode="push" >
+        <mat-toolbar class="color-override e-divider" fxLayout="column" fxLayoutAlign="center center">
+            <i class="material-icons">local_movies</i>
+        </mat-toolbar>
+        <app-sidenav></app-sidenav>
+    </mat-drawer>
+
+    <div class="sidenav-content">
+        <mat-toolbar class="eande-toolbar-top" [ngClass]='{"fixed-top": mediaService.screen_break_points.xsmall != true}'>
+            <mat-toolbar-row>
+                <button [disabled]='router.url == "/convert"' class='logo-color mat-elevation-z1' (click)='scrollToTop()' [ngClass]="{'full-height-button-title': mediaService.screen_break_points.xsmall != true, 'full-height-button-mobile': mediaService.screen_break_points.xsmall == true}"
+                    type="button" mat-button matTooltip="Movies" routerLink="">
+                    <span class='weight300 white-font'>e&e</span>
+                </button>
+                <button fxHide.xs fxHide.sm *ngIf="service.currentlyRegistering == false && router.url != '/convert'" type="button" [ngClass]="{'full-height-button': mediaService.screen_break_points.xsmall != true, 'full-height-button-mobile': mediaService.screen_break_points.xsmall == true}"
+                    mat-button (click)="drawer.toggle()">
+                    <i class="material-icons">&#xE148;</i>
+                    Add New Movie
+                </button>
+                <!-- <button type="button"  [ngClass]="{'full-height-button': mediaService.screen_break_points.xsmall != true, 'full-height-button-mobile': mediaService.screen_break_points.xsmall == true}" mat-button matTooltip="Movies" [matTooltipPosition]="position" routerLink="">
+                    <i class="material-icons">&#xE43A;</i>
+                    Movies
+                </button> -->
+
+                <span class="fill-remaining-space"></span>
+                <button fxHide.md fxHide.lg fxHide.xl class='button-spacing' *ngIf='router.url == "/movies" || router.url != "/convert" && service.currentlyRegistering == false'
+                    type="button" mat-icon-button (click)="drawer.toggle()">
+                    <i class="material-icons">&#xE148;</i>
+
+                </button>
+
+
+
+                <!-- <button *ngIf='router.url == "/movies" && service.currentlyRegistering == false' class='button-spacing' type="button" mat-icon-button matTooltip="Sort By Rating"
+                    [matTooltipPosition]="position" (click)="firebase.sortRating()">
+                    <i class="material-icons">&#xE838;</i>
+                </button>
+                <button *ngIf='router.url == "/movies" && service.currentlyRegistering == false' class='button-spacing' type="button" mat-icon-button matTooltip="Alphabetical" [matTooltipPosition]="position"
+                    (click)="firebase.sortAlphabetical()">
+                    <i class="material-icons">&#xE053;</i>
+                </button> -->
+                <button fxHide.md fxHide.lg fxHide.xl *ngIf='router.url == "/movies" && service.currentlyRegistering == false' class='button-spacing' type="button" mat-icon-button
+                    matTooltip="Toggle between all and new movies" [matTooltipPosition]="position" (click)="service.toggleListFrame()" >
+                    <i [ngClass]='{"button-active": service.movieListShowFrame ==  "true"}' class="material-icons">
+                        view_module
+                    </i>
+                </button>
+                <button fxHide.md fxHide.lg fxHide.xl *ngIf="router.url == '/movies' && service.currentlyRegistering == false" class='button-spacing' type="button" mat-icon-button
+                    matTooltip="Toggle between all and new movies" [matTooltipPosition]="position" (click)="service.toggleListFrame()" >
+                    <i [ngClass]='{"button-active": service.movieListShowFrame == "false"}' class="material-icons">
+                        view_stream
+                    </i>
+                </button>
+
+<!-- 
+                <button *ngIf='router.url == "/movies" && service.currentlyRegistering == false' class='button-spacing' type="button" mat-icon-button
+                    matTooltip="Toggle between all and new movies" [matTooltipPosition]="position" (click)="changeWatchedSwitch()">
+                    <i [ngClass]='{"button-active": service.checked}' class="material-icons">&#xE05E;</i>
+                </button> -->
+
+
+                <!-- <mat-slide-toggle *ngIf='router.url == "/movies"' color="accent" matTooltip="Toggle between all and new movies" [matTooltipPosition]="position"
+                    [checked]="service.checked" (change)="changeWatchedSwitch($event)">
+                    <i color="primary" class="material-icons">&#xE05E;</i>
+                </mat-slide-toggle> -->
+
+                <button *ngIf="service.currentlyRegistering == false && router.url != '/convert'" type="button" mat-icon-button matTooltip="Movies" [matTooltipPosition]="position"
+                    (click)="right.toggle()">
+                    <i class="material-icons">settings</i>
+                </button>
+            </mat-toolbar-row>
+        </mat-toolbar>
+
+        <div [@routerAnimation]="getRouteAnimation(route)">
+            <router-outlet #route="outlet"></router-outlet>
+        </div>
+
+
+    </div>
+    <mat-drawer position="end" #right class="mat-elevation-z2" mode="push"  >
+        <mat-toolbar class="color-override e-divider" fxLayout="row" fxLayoutAlign="center center">
+            {{firebase.firebaseAccountData.user_name}}
+            <img src={{firebase.firebaseAccountData.user_photo}} class='user-image'/>
+        </mat-toolbar>
+        <app-account-info></app-account-info>
+
+    </mat-drawer>
+
+
+</mat-drawer-container>

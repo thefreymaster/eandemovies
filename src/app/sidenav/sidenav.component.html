@@ -1,0 +1,68 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div class="padding-20">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Movie Title" [(ngModel)]="firebase.searchObject.title" (keydown)="keydownSubmit($event)">
+    </mat-form-field>
+  </div>
+  <div class="padding-20">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Year of Movie" value="" [(ngModel)]="firebase.searchObject.year" (keydown)="keydownSubmit($event)">
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <button [disabled]="firebase.searchObject.title.length == 0 || disableSearch == true" type="button" mat-raised-button color="primary" class="btn-block"
+      (click)="search(firebase.searchObject.title, firebase.searchObject.year)">
+      Search
+    </button>
+    <button type="button" mat-raised-button color="primary" class="btn-block" (click)="clear()">
+      Clear
+    </button>
+  </div>
+
+</div>
+
+
+<mat-list>
+  <mat-divider></mat-divider>
+
+  <h3 *ngIf="service.movies.length != 0" mat-subheader>Search Results</h3>
+  <mat-divider></mat-divider>
+  <div fxLayout="column">
+
+    <div *ngFor="let movie of service.movies" (click)="firebase.addMovie(movie, true, false); drawer.close()" class='hover-cursor'
+    angulartics2On="click" angularticsAction="movie-added" angularticsLabel="movie-added">
+      <i class="material-icons add-icon">&#xE148;</i>
+      <img class='side-nav-poster mat-elevation-z2' src="http://image.tmdb.org/t/p/w342{{movie.poster_path}}" alt="...">
+      <div class='side-nav-text-container'>
+        <!-- <div fxLayout="row" fxLayoutAlign="center center">
+          <div class='left mat-display-1 side-nav-title weight200'>
+            {{movie.Title}}
+          </div>
+        </div> -->
+
+
+        <div fxLayout="row" class='padding10 icon-over-image' fxLayoutAlign="center center">
+          <mat-chip-list>
+            <mat-chip class='mat-subheading-1'>{{movie.release_date}}</mat-chip>
+            <mat-chip class='mat-subheading-1'>{{movie.vote_average}}</mat-chip>
+          </mat-chip-list>
+        </div>
+
+      </div>
+
+    </div>
+    <div *ngFor="let error of service.movies">
+      <mat-list-item *ngIf="service.movies.Response == 'False'">
+        <h4 class='left'>
+          {{error.Error}}
+        </h4>
+        <p mat-line class='left margin-align'> Try again! </p>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </div>
+  </div>
+
+
+</mat-list>
+
+{{service.movies}}
