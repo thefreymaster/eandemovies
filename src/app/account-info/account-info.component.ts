@@ -15,12 +15,13 @@ export class AccountInfoComponent implements OnInit {
 
   newAccountID: string;
   firebaseAccountData;
+  shareableKey;
 
   ngOnInit() {
     
-    
   }
   changeAccountID(newID){
+    this.firebase.updateUserDataInFirebase(newID)
     this.firebase.changingID = true;
     this.firebase.updateUserDataInFirebase(newID);
     localStorage.setItem('accountID', newID);
@@ -31,6 +32,7 @@ export class AccountInfoComponent implements OnInit {
 
   keydownSubmit(event, newID){
     if(event.keyCode == 13) {
+      this.firebase.updateUserDataInFirebase(newID)
       this.firebase.changingID = true;
     
       localStorage.setItem('accountID', newID);

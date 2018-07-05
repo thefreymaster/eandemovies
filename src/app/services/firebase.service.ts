@@ -12,12 +12,12 @@ export class FirebaseService {
     title: '',
     year: ''
   }
-  accountID;
+  accountID = localStorage.getItem('accountID');
   changingID = false;
   sortedAlpha;
   sortedRatingDecending;
   oldAccountID;
-  currentVersion = '2.03'
+  currentVersion = '2.10'
   FIREBASE_AUTH_DATA = {};
 
   listnames = ['cinema', 'movie', 'film', 'theater', 'camera', 'hollywood', 'popcorn', 'candy', 'megaplex', 'imax', 'premiere', 'motion', 'frame', 'flick', 'animation', 'projector', 'release', 'screen', 'reel', 'still', 'storyboard', 'screenplay', 'studio', 'stunt', 'star', 'lead', 'actor', 'actress', 'director', 'producer', 'nacho', 'boxoffice', 'dialog', 'script', 'cinematic', 'cast', 'lights', 'scene', 'outtake', 'filmstar', 'remake', 'trilogy', 'sequel', 'butter', 'light', 'bulb', 'ticket', 'stub', 'que', 'lens', 'preview', 'genres', 'documentary', 'drama', 'comedy', 'horror'];
@@ -45,11 +45,11 @@ export class FirebaseService {
 
   constructor(public db: AngularFireDatabase, public service: DataTransferService, public http: HttpClient, public router: Router) {
     this.localRouter = router;
-    this.setAccountID();
+    // this.setAccountID();
     this.getFirebaseGoogleDataFromLocalStorage();
 
     this.moviesObject.firebaseRef = db.list('accounts');
-    this.items = db.list('accounts/' + this.accountID).valueChanges();
+    this.items = db.list('accounts/' + localStorage.getItem('accountID')).valueChanges();
     this.items.subscribe(items => {
       this.moviesObject.localMovies = [];
 
@@ -57,7 +57,7 @@ export class FirebaseService {
         console.log('V1.0 data found');
         this.oldAccountID = localStorage.getItem('accountID');
         localStorage.removeItem('accountID');   
-        this.setAccountID();   
+        // this.setAccountID();   
         this.router.navigate(['convert']); 
         items.forEach(movie => {
           this.convert(movie.data);       
@@ -130,7 +130,7 @@ export class FirebaseService {
     this.service.movies = [];
     this.moviesObject.localMovies.push({ data: movie.results[0], metrics: { watched: false } });
 
-    this.moviesObject.firebaseRef.update(this.accountID, this.moviesObject.localMovies).then(function (this, results) {
+    this.moviesObject.firebaseRef.update(localStorage.getItem('accountID'), this.moviesObject.localMovies).then(function (this, results) {
 
     });
   }
@@ -146,7 +146,7 @@ export class FirebaseService {
     this.service.movies = [];
     this.moviesObject.localMovies.push({ data: movie, metrics: { watched: false } });
 
-    this.moviesObject.firebaseRef.update(this.accountID, this.moviesObject.localMovies).then(function (this, results) {
+    this.moviesObject.firebaseRef.update(localStorage.getItem('accountID'), this.moviesObject.localMovies).then(function (this, results) {
     });
 
 
@@ -180,7 +180,7 @@ export class FirebaseService {
       if (movie.data.imdbID == this.moviesObject.localMovies[j].data.imdbID) {
         this.moviesObject.localMovies[j] = movie;
         // this.moviesObject.localMovies.push(movie);
-        this.moviesObject.firebaseRef.update(this.accountID, this.moviesObject.localMovies).then(function (results) {
+        this.moviesObject.firebaseRef.update(localStorage.getItem('accountID'), this.moviesObject.localMovies).then(function (results) {
           // console.log(results);
           if (this.moviesObject.localMovies.length > 0) {
             this.router.navigate(['movies']);
@@ -202,18 +202,14 @@ export class FirebaseService {
   }
 
   setAccountID() {
-    this.accountID = localStorage.getItem('accountID');
-    if (this.accountID == null) {
       let randomNum = Math.floor(56) * Math.random();
       randomNum = Math.round(randomNum);
-      this.accountID = Math.random()*100000;
-      this.accountID = Math.floor(this.accountID);
-      this.accountID = Math.round(this.accountID);
+      let accountIDnum = Math.random()*100000;
+      accountIDnum = Math.floor(accountIDnum);
+      accountIDnum = Math.round(accountIDnum);
 
-      this.accountID = this.listnames[randomNum] + this.accountID;
-      localStorage.setItem('accountID', this.accountID);
-    }
-    console.log(this.accountID);
+      this.accountID = this.listnames[randomNum] + accountIDnum;
+      return this.accountID;
 
   }
 

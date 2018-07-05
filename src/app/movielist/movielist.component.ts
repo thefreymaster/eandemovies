@@ -43,9 +43,9 @@ export class MovielistComponent implements OnInit {
 
   items: Observable<any[]>;
   constructor(db: AngularFireDatabase, public service: DataTransferService, public mediaService: MediaService, public firebase: FirebaseService, public router: Router) {
-    if (this.firebase.firebaseAccountData.uid.length != 0) {
+    if (localStorage.getItem('uid')) {
       this.moviesObject.firebaseRef = db.list('account');
-      this.items = db.list('accounts/' + this.firebase.accountID).valueChanges();
+      this.items = db.list('accounts/' + localStorage.getItem('accountID')).valueChanges();
       this.items.subscribe(items => {
         // items is an array
         this.moviesObject.localMovies = [];
@@ -56,7 +56,7 @@ export class MovielistComponent implements OnInit {
         // console.log(items);
         if (this.moviesObject.localMovies.length == 0) {
           this.service.currentlyRegistering = true;
-          router.navigate(['login']);
+          // router.navigate(['login']);
         }
 
       });

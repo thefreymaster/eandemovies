@@ -31,7 +31,7 @@ export class RetrieveComponent {
     this.changingIDs = true;
     this.service.firstSearch = true;
     this.firebase.updateUserDataInFirebase(newID);
-    localStorage.setItem('accountID', newID);
+    // localStorage.setItem('accountID', newID);
     this.firebase.accountID = newID;
     setTimeout(() => {
       location.reload();

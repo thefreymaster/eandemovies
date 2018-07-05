@@ -12,9 +12,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  getRouteAnimation(outlet) {
-    return outlet.activatedRouteData.animation
-  }
+  // getRouteAnimation(outlet) {
+  //   return outlet.activatedRouteData.animation
+  // }
 
   firebaseAccountLocalStorage;
   firebaseAccountDataPopulated = false;

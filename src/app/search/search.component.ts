@@ -16,8 +16,13 @@ import { DataTransferService } from '../services/data-transfer.service';
 export class SearchComponent {
 
   searchItemDisplayed = false;
-  constructor(router: Router, public firebase: FirebaseService, public service: DataTransferService) { 
+  constructor(public router: Router, public firebase: FirebaseService, public service: DataTransferService) { 
 
+  }
+  ngOnInit() {
+    if(localStorage.getItem('FIRST_TIME') === 'false'){
+      this.router.navigate(['movies']); 
+    }
   }
 
 

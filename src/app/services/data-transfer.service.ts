@@ -122,7 +122,7 @@ export class DataTransferService {
     },
     error => {
       this.amazonItemsFound = false;
-      console.error(error);
+      console.log(error);
     })
   }
   movieClicked(movie){

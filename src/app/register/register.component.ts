@@ -29,7 +29,7 @@ export class RegisterComponent {
   }
   changeAccountID(newID){
     this.service.firstSearch = true;
-    localStorage.setItem('accountID', newID);
+    // localStorage.setItem('accountID', newID);
     this.firebase.accountID = newID;
     // setTimeout(() => {
     //   location.reload();
