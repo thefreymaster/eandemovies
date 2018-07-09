@@ -36,7 +36,8 @@ export class MovieInfoComponent implements OnInit {
     }
   }
 
-  openAmazonPage(){
+  openAmazonPage(movie_title){
+    // let amazon_link = 'https://www.amazon.com/gp/product/B00C1BV9Z6/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B00C1BV9Z6&linkCode=as2&tag=canvas23studios-20&linkId=9b494a6cc9e43125ee3c333820b2e34d'
     window.open(this.service.amazonItems);
   }
   radioChange(event, movie) {
@@ -50,6 +51,7 @@ export class MovieInfoComponent implements OnInit {
       movie.metrics.watched = false;
     }
     this.firebase.updateMovie(movie);
+
 }
 
 

@@ -194,7 +194,7 @@
       <div fxFlex='30'></div>
       <div fxFlex='70'>
 
-        <a *ngIf="service.amazonItemsFound == true" (click)='service.acquision(service.currentBigScreenObject.data.title); openAmazonPage()'
+        <a *ngIf="service.amazonItemsFound == true" (click)='service.acquision(service.currentBigScreenObject.data.title); openAmazonPage(service.currentBigScreenObject.data.title)'
           class='remove-decoration margin-left10'>
           <button color="accent" type="button" mat-raised-button>
             <i class="material-icons">&#xE8CC;</i>
