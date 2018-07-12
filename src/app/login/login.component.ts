@@ -48,10 +48,12 @@ export class LoginComponent implements OnInit {
           let assigned_list = _this.firebase.setAccountID();
           userdata = [{
             name: data.user.displayName,
+            email: data.user.email,
             uid: data.user.uid,
             assigned_list: assigned_list,
             locate: data.additionalUserInfo.profile.locale,
-            gender: data.additionalUserInfo.profile.gender
+            gender: data.additionalUserInfo.profile.gender,
+            photo: data.user.photoURL
           }]
           _this.firebaseUserInfo.update(userdata[0].uid, userdata)
           localStorage.setItem('FIRST_TIME', 'true');

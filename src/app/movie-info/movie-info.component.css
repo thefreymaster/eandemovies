@@ -9,3 +9,8 @@
     position: fixed;
 	bottom: 0;
 }
+.disclaimer{
+    font-size: 10px;
+	font-family: Roboto;
+	color: #bbb7b7;
+}
